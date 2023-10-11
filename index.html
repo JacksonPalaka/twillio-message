@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twilio SMS Example</title>
+</head>
+<body>
+    <h1>Twilio SMS Example</h1>
+
+    <label for="messageInput">Enter a custom message:</label>
+    <input type="text" id="messageInput" placeholder="Your message">
+    <button id="sendSmsButton">Send SMS</button>
+    <div id="smsResponse"></div>
+
+    <script>
+
+        // messageToSend=document.getElementById('messageInput').value
+        document.getElementById("sendSmsButton").addEventListener("click", function () {
+            // const accountSid = 'AC7e44ff3272ccd24e99847a8cc652bf4f';
+            const accountSid = 'AC044618be93c2cd6b98d522ca5cce1e04';
+            // const authToken = 'f294419e1f96144af5e73132d1d80457';
+            const authToken = '54dc499ce861d0b3e3900f8ab837f92e';
+
+            // const fromNumber = '+13345184683';
+            const fromNumber = '+12512207713 ';
+            const toNumber = '+917205760842';
+            // const toNumber = '+919692166127';
+            const messageBody = document.getElementById('messageInput').value;
+
+            fetch('https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(accountSid + ':' + authToken),
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'To=' + encodeURIComponent(toNumber) + '&From=' + encodeURIComponent(fromNumber) + '&Body=' + encodeURIComponent(messageBody),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("smsResponse").innerHTML = 'Succesfully send the train details ' ;
+                // document.getElementById("smsResponse").innerHTML = 'Succesfully send the train details ' + data.sid;
+            })
+            .catch(error => {
+                document.getElementById("smsResponse").innerHTML = 'Error: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
