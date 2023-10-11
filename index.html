@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Twilio SMS Example</title>
+    <title> Twilio SMS Example</title>
 </head>
+
 <body>
-    <h1>Twilio SMS Example</h1>
+    <h1>Sending sms with the train details</h1>
 
     <label for="messageInput">Enter a custom message:</label>
     <input type="text" id="messageInput" placeholder="Your message">
@@ -12,19 +14,17 @@
     <div id="smsResponse"></div>
 
     <script>
-
-        // messageToSend=document.getElementById('messageInput').value
         document.getElementById("sendSmsButton").addEventListener("click", function () {
-            // const accountSid = 'AC7e44ff3272ccd24e99847a8cc652bf4f';
             const accountSid = 'AC044618be93c2cd6b98d522ca5cce1e04';
-            // const authToken = 'f294419e1f96144af5e73132d1d80457';
-            const authToken = '54dc499ce861d0b3e3900f8ab837f92e';
+            const authToken = '07b5f7be8321f8f0bad2cd9bf4eb3db8';
+            // const accountSid = 'AC7e44ff3272ccd24e99847a8cc652bf4f';
+            // const authToken = 'c6f4b6bdf042f01de83711e2d29c9d8a';
 
+            const fromNumber = '+12512207713';
+            const toNumber = '+918847835290';
             // const fromNumber = '+13345184683';
-            const fromNumber = '+12512207713 ';
-            const toNumber = '+917205760842';
             // const toNumber = '+919692166127';
-            const messageBody = document.getElementById('messageInput').value;
+            const messageBody = document.getElementById("messageInput").value; // Get the message from the input field
 
             fetch('https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json', {
                 method: 'POST',
@@ -34,15 +34,22 @@
                 },
                 body: 'To=' + encodeURIComponent(toNumber) + '&From=' + encodeURIComponent(fromNumber) + '&Body=' + encodeURIComponent(messageBody),
             })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("smsResponse").innerHTML = 'Succesfully send the train details ' ;
-                // document.getElementById("smsResponse").innerHTML = 'Succesfully send the train details ' + data.sid;
-            })
-            .catch(error => {
-                document.getElementById("smsResponse").innerHTML = 'Error: ' + error.message;
-            });
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("smsResponse").innerHTML = 'For the initial time only the message you input is send after,\n further development,it can directly send sms after fetching the train details';
+                    // document.getElementById("smsResponse").innerHTML = 'SMS SID: ' + data.sid;
+                })
+                // .catch(error => {
+                //     document.getElementById("smsResponse").innerHTML = 'Error: ' + error.message;
+                // });
+                .catch(error => {
+                    console.log(error);
+                    document.getElementById("smsResponse").innerHTML = 'Error: ' + error.message;
+                });
+
+
         });
     </script>
 </body>
+
 </html>
