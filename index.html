@@ -15,15 +15,11 @@
 
     <script>
         document.getElementById("sendSmsButton").addEventListener("click", function () {
-            const accountSid = 'AC044618be93c2cd6b98d522ca5cce1e04';
-            const authToken = '07b5f7be8321f8f0bad2cd9bf4eb3db8';
-            // const accountSid = 'AC7e44ff3272ccd24e99847a8cc652bf4f';
-            // const authToken = 'c6f4b6bdf042f01de83711e2d29c9d8a';
+            const accountSid = 'AC2ac9ceb551f65a42ec0563ca4400b15d';
+            const authToken = '9760fe7d6987f6e43b413f69cf6b1fe8';
 
-            const fromNumber = '+12512207713';
-            const toNumber = '+918847835290';
-            // const fromNumber = '+13345184683';
-            // const toNumber = '+919692166127';
+            const fromNumber = '+13343266282';
+            const toNumber = '+919985778245';
             const messageBody = document.getElementById("messageInput").value; // Get the message from the input field
 
             fetch('https://api.twilio.com/2010-04-01/Accounts/' + accountSid + '/Messages.json', {
